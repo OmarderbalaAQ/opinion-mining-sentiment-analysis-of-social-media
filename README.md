@@ -65,14 +65,16 @@ This project implements a multi-modal sentiment analysis system:
    git clone https://github.com/yourusername/sentiment-content-analysis.git
    cd sentiment-content-analysis
 
-### Create a Virtual Environment
+2. **Create a Virtual Environmenty**
+   ```bash
+   conda create --name sentiment_env python=3.10
+   conda activate sentiment_env
 
-conda create --name sentiment_env python=3.10
-conda activate sentiment_env
 
-### Install Requirements
-pip install -r requirements.txt
 
+3. **nstall Requirements**
+   ```bash
+   pip install -r requirements.txt
 
 
 ## Results & Future Work
