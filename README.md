@@ -5,12 +5,8 @@ Sentiment &amp; Content Analysis System This repository contains the code for my
 
 - [Project Overview](#project-overview)
 - [Features](#features)
-- [Repository Structure](#repository-structure)
 - [Setup & Installation](#setup--installation)
-- [Usage](#usage)
-- [Deployment](#deployment)
 - [Results & Future Work](#results--future-work)
-- [License](#license)
 
 ---
 
