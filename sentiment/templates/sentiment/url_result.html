@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>URL Sentiment Analysis</title>
+</head>
+
+<body>
+    <h1>URL Sentiment Analysis Result</h1>
+
+    <p><strong>Analyzed URL:</strong> {{ url }}</p>
+
+    <hr>
+
+    <p><strong>Post Text:</strong></p>
+    <p style="margin-left: 20px;">{{ post_text }}</p>
+
+    <hr>
+
+    <p><strong>Text Sentiment:</strong> {{ text_sentiment }} {{ emoji }}</p>
+    <p><strong>Image Sentiment:</strong> {{ image_sentiment }}</p>
+
+    {% if image_path %}
+    <hr>
+    <p><strong>Analyzed Image:</strong></p>
+    <img src="/{{ image_path }}" alt="Analyzed Image" width="300">
+    {% endif %}
+
+    <br><br>
+    <a href="{% url 'url_input' %}">🔄 Analyze another URL</a>
+</body>
+
+</html>
