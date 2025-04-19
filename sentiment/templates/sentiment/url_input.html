@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Analyze Social Media URL</title>
+</head>
+
+<body>
+    <h1>Enter a Social Media URL</h1>
+    <form action="{% url 'url_result' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="url" placeholder="Paste URL here..." size="60" required>
+        <br><br>
+        <button type="submit">Analyze</button>
+    </form>
+</body>
+
+</html>
