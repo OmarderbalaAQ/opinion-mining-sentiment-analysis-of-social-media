@@ -59,12 +59,12 @@ def result(request):
     return redirect("home")
 
 # URL VIEWS
-def url_input(request):
-    return render(request, "sentiment/url_input.html")
+# def url_input(request):
+#     return render(request, "sentiment/index.html")
 
 def url_result(request):
     if request.method == "POST":
-        url = request.POST.get("url")
+        url = request.POST.get("url" , "")
         if url:
             result = extract_social_media_data(url)
             text_sentiment = analyze_sentiment([result["combined_text"]])[0]
@@ -89,4 +89,4 @@ def url_result(request):
                 "image_path": image_path,
                 "post_text": result["combined_text"],
             })
-    return redirect("url_input")
+    return redirect("home")
