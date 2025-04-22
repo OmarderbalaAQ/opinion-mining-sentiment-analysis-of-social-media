@@ -7,12 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Sentiment Result</title>
     <link rel="stylesheet" href="{% static 'sentiment/css/text_result.css' %}">
+    {% comment %} <link rel="stylesheet" href="css/text_result.css"> {% endcomment %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="back">
+<body>
+    <!-- bootstrap navbar -->
     <nav class="navbar navbar-expand-lg dark-back">
         <div class="container-fluid container p-1">
             <a class="navbar-brand text-white" href="#">Social Media Analysis</a>
@@ -22,7 +24,7 @@
             <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
                 <ul class="navbar-nav align-items-end">
                     <li class="nav-item mx-3">
-                        <a class="nav-link active text-white" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link active text-white" aria-current="page" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item mx-3">
                         <a class="nav-link text-white" href="features.html">Features</a>
@@ -45,17 +47,19 @@
         </div>
     </nav>
 
-    <section class="text-center">
-        <div class="p-3 container"> 
-            <h1 class="header p-3">Sentiment Analysis Result</h1>
-            <p class="p-2 fs-5"><strong class="header">Text:</strong> {{ text }}</p>
-            <p class="p-1 fs-5"><strong class="header">Predicted Sentiment:</strong> <i id="sent">{{ sentiment }}</i> {{ emoji }}</p>
+    <section class="text-center body-back">
+        <div class="container part-1 position-relative">
+            <img src="../../static/sentiment/images/firstball.png" alt="ball" class="ball-1">
+            <h1 class="header p-3 text-white">Sentiment Analysis Result</h1>
+            <p class="p-2 fs-5 text-white"><strong class="header">Text:</strong> {{ text }}</p>
+            <p class="p-1 fs-5 text-white"><strong class="header">Predicted Sentiment:</strong> <i id="sent">{{ sentiment }}</i> {{ emoji }}</p>
             <br>
             <a class="but" href="{% url 'home' %}">Analyze Another Text</a>
         </div>
     </section>
 
     <script src="{% static 'sentiment/js/text_result.js' %}"></script>
+    {% comment %} <script src="js/text_result.js"></script> {% endcomment %}
 </body>
 
 </html>

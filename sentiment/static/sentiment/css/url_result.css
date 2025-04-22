@@ -31,21 +31,9 @@
 }
 
 .part-1{
-    padding-top: 12vh;
+    padding-top: 10vh;
 }
 
-.ball-1{
-    position: absolute;
-    left: 0;
-    height: 100px;
-}
-
-.header{
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 .but{
     display: inline-block;
     padding: 8px 16px;

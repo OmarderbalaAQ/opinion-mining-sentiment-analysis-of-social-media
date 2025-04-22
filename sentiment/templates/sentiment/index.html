@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="back">
+<body>
     <!-- bootstrap navbar -->
     <nav class="navbar navbar-expand-lg dark-back">
         <div class="container-fluid container p-1">
@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
                 <ul class="navbar-nav align-items-end">
                     <li class="nav-item mx-3">
-                        <a class="nav-link active text-white" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link active text-white" aria-current="page" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item mx-3">
                         <a class="nav-link text-white" href="features.html">Features</a>
@@ -46,10 +46,10 @@
         </div>
     </nav>
 
-    <section class="position-relative">
-        <div class="container">
-            <h1 class="header pt-4 text-center ">Social Media Analysier</h1>
-            <p class="header mt-3 fs-5 text-center ">Use analysis to quickly detect feelings and pain points.</p>
+    <section class="position-relative robo-back">
+        <div class="container part-1">
+            <h1 class="header pt-4 text-center text-white">Social Media Analysier</h1>
+            <p class="header mt-3 fs-5 text-center text-white">Use analysis to quickly detect feelings and pain points.</p>
             <div class="tab-container">
                 <div class="tabs">
                     <div class="tab active text-white" data-tab="tab1">Text Analysis</div>
@@ -59,22 +59,22 @@
                 <div id="tab1" class="tab-content active">
                     <form class="p-3 row justify-content-center" action="{% url 'result' %}" method="POST">
                         {% csrf_token %}
-                        <label class="col-lg-12 text-center mb-3 fs-4 fw-bold" for="text">Enter your text here</label>
+                        <label class="col-lg-12 text-center mb-3 fs-4 fw-bold text-white" for="text">Enter your text here</label>
                         <div class="col-lg-12 row justify-content-center">
                             <textarea class="col-6  txt-area text-center pt-3" name="text" placeholder="Lets analyze your text" id="text" ></textarea>
                         </div>
-                        <input class="col-lg-3 col-sm-4 col-6 mt-3 mb-3 dark-back text-white" id="submit" type="submit" value="Analyze Sentiment" >
+                        <input class="col-lg-3 col-sm-4 col-6 mt-3 mb-3 dark-back text-white rounded submit" id="submit" type="submit" value="Analyze Sentiment" >
                     </form>
                 </div>
                 
                 <div id="tab2" class="tab-content">
                     <form class="p-3 row justify-content-center" action="{% url 'url_result' %}" method="POST">
                         {% csrf_token %}
-                        <label class="col-lg-12 text-center mb-3 fs-4 fw-bold" for="url">Enter URL here</label>
+                        <label class="col-lg-12 text-center mb-3 fs-4 fw-bold text-white" for="url">Enter URL here</label>
                         <div class="col-lg-12 row justify-content-center">
                             <textarea class="col-6  txt-area text-center pt-3" name="url" placeholder="Lets analyze your URL" id="text_url"></textarea>
                         </div>
-                        {% comment %} <div class="d-flex justify-content-center gap-3 pt-3">
+                        <!-- {% comment %} <div class="d-flex justify-content-center gap-3 pt-3">
                             <label class>
                                 <input type="radio" name="option" value="Post">
                                 POST
@@ -94,34 +94,10 @@
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
-                        </div> {% endcomment %}
-                        <input class="col-lg-3 col-sm-4 col-6 mt-3 mb-3 dark-back text-white"  type="submit" value="Analyze URL">
+                        </div> {% endcomment %} -->
+                        <input class="col-lg-3 col-sm-4 col-6 mt-3 mb-3 dark-back text-white rounded submit"  type="submit" value="Analyze URL">
                     </form>
                 </div>
-            </div>
-        </div>
-        <!-- flex info about sentiment analysis -->
-        <div class="mb-4">
-            <h2 class='text-center dark'>How can sentiment analysis help you</h2>
-        </div>
-        <div class="row container text-center m-auto">
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                <p class="p-3 three-para">
-                    <i class="fa-solid fa-check dark"></i>
-                    Learn the topics your clients are most happy or unhappy about.
-                </p>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                <p class="p-3 three-para">
-                    <i class="fa-solid fa-check dark"></i>
-                    Identify pain-points and detect patterns in client needs and behavior
-                </p>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                <p class="p-3 three-para">
-                    <i class="fa-solid fa-check dark"></i>
-                    Quickly detect negative feedback and take action instantly.
-                </p>
             </div>
         </div>
             <!-- the up rising icons -->
@@ -137,7 +113,60 @@
             </ul>
         </div>
     </section>
-    
+    <section class="position-relative p-5 part-2">
+        <img src="../../static/sentiment/images/bubbles1.png" alt="bubbles1" class="b-image-1">
+        <div class="container mt-5 white-part">
+            <!-- flex info about sentiment analysis -->
+            <div class="pb-5">
+                <h1 class='text-center white-h'>How can sentiment analysis help you</h1>
+            </div>
+            <div class="row container text-center m-auto pt-5">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <p class="p-3 three-para">
+                        <i class="fa-solid fa-check"></i>
+                        Learn the topics your clients are most happy or unhappy about.
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <p class="p-3 three-para">
+                        <i class="fa-solid fa-check"></i>
+                        Identify pain-points and detect patterns in client needs and behavior
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <p class="p-3 three-para">
+                        <i class="fa-solid fa-check"></i>
+                        Quickly detect negative feedback and take action instantly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg2 position-relative">
+        <img src="../../static/sentiment/images/bubble2.jpg" alt="bubbles2" class="shake-hand">
+        <img src="../../static/sentiment/images/bubbles3.png" alt="bubbles3" class="b-image-2">
+        <div class="text-center third-page">
+            <h1 class=" text-white">Use Cases For Our Solution</h1>
+            <h2 class=" text-white">Who Benefits ?</h2>
+            <div class="row container text-center m-auto justify-content-center gap-5 pt-5 cards">
+                <div class="col-3 card-1">
+                    <h4 class="p-3">E-commerce</h4>
+                    <p class="p-3">Analyze product reviews to improve sales.</p>
+                </div>
+                <div class="col-3 card-2">
+                    <h4 class="p-3">Social Media Managers</h4>
+                    <p class="p-3">Track brand sentiment across platforms.</p>
+                </div>
+                <div class="col-3 card-3">
+                    <h4 class="p-3">Security</h4>
+                    <p class="p-3">Detect inappropriate content automatically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        
+    </footer>
     <script src="{% static 'sentiment/js/script.js' %}"></script>
 </body>
 
