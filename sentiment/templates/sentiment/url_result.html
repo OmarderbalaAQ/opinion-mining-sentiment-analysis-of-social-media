@@ -48,24 +48,24 @@
     <section class="text-center body-back">
         <div class="container part-1 text-white">
             <h1>URL Sentiment Analysis Result</h1>
-            <p><strong>Analyzed URL:</strong> {{ url }}</p>
+            <strong>Analyzed URL :</strong>
+            <p class="url"> {{ url }}</p>
             <hr>
             <p><strong>Post Text:</strong></p>
-            <p style="margin-left: 20px;">{{ post_text }}</p>
+            <p>{{ post_text }}</p>
             <hr>
-            <p><strong>Text Sentiment:</strong> {{ text_sentiment }} {{ emoji }}</p>
-            <p><strong>Image Sentiment:</strong> {{ image_sentiment }}</p>
+            <p><strong>Text Sentiment:</strong> {{ text_sentiment }} {{ emoji }} Positive :</p>
+            <p><strong>Image Sentiment:</strong> {{ image_sentiment }} Positive</p>
             {% if image_path %}
             <hr>
             <p><strong>Analyzed Image:</strong></p>
-            <img src="/{{ image_path }}" alt="Analyzed Image" width="300">
+            <img class="d-block m-auto" src="/{{ image_path }}" alt="Analyzed Image" width="300">
             {% endif %}
-            <br><br>
-            <a class="but" href="{% url 'url_input' %}">Analyze another URL </a>
+            <a class="but mt-3" href="{% url 'home' %}">Analyze another URL </a>
         </div>
     </section>
 
-
+    
 
 
     <script src="{% static 'sentiment/js/url_result.js' %}"></script>
