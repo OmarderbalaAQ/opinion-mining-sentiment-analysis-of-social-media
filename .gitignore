@@ -1,0 +1,14 @@
+# .gitignore
+*.h5
+*.csv
+*.pkl
+data/
+logs/
+outputs/
+venv/
+.env
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+*.ipynb_checkpoints/
