@@ -8,9 +8,12 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.svm import SVC
-
 from .image_model import predict_image_sentiment
-from .scraping_model import extract_social_media_data
+from urllib.parse import urlparse
+from sentiment.facebook_model import SocialMediaScraper
+from sentiment.twitter_model import twitter_login, extract_from_tweet, extract_from_hashtag
+from .models import TextPrediction
+from .models import URLPrediction
 
 # Ensure nltk dependencies are downloaded
 #nltk.download('stopwords')
@@ -35,12 +38,16 @@ message = vectorizer.fit_transform(tweets_df['text'])
 svc_model = SVC(C=0.2, kernel='linear', gamma=0.8)
 svc_model.fit(message, tweets_df.sentiment)
 
-# Shared prediction function
-def analyze_sentiment(texts):
+def analyze_sentiment(text, image_path=None):
+    # Handle empty or invalid input
+    if not text or not isinstance(text, str):
+        return [(text, "Neutral", "😐")]
+    # Wrap single string in a list for vectorizer
+    texts = [text] if isinstance(text, str) else text
     predictions = vectorizer.transform(texts)
     results = svc_model.predict(predictions)
     emoji_map = {'positive': '😀', 'negative': '😞', 'neutral': '😐'}
-    return [(text, sentiment, emoji_map.get(sentiment, '❓')) for text, sentiment in zip(texts, results)]
+    return [(t, sentiment, emoji_map.get(sentiment.lower(), '❓')) for t, sentiment in zip(texts, results)]
 
 # TEXT VIEWS
 def home(request):
@@ -48,9 +55,13 @@ def home(request):
 
 def result(request):
     if request.method == "POST":
-        text = request.POST.get("text", "")
+        text = request.POST.get("text", "").strip()
         if text:
-            result = analyze_sentiment([text])[0]
+            result = analyze_sentiment(text)[0]  # Take first tuple since we passed a single text
+            TextPrediction.objects.create(
+                text=text,
+                sentiment=result[1]
+            )
             return render(request, "sentiment/text_result.html", {
                 "text": result[0],
                 "sentiment": result[1],
@@ -58,35 +69,89 @@ def result(request):
             })
     return redirect("home")
 
-# URL VIEWS
-# def url_input(request):
-#     return render(request, "sentiment/index.html")
-
 def url_result(request):
     if request.method == "POST":
-        url = request.POST.get("url" , "")
+        url = request.POST.get("url", "").strip()
+        text_sentiment = "N/A"
+        emoji = ""
+        image_sentiment = "N/A"
+        image_path = None
+        post_text = ""
+
         if url:
-            result = extract_social_media_data(url)
-            text_sentiment = analyze_sentiment([result["combined_text"]])[0]
-            text_label = text_sentiment[1]
-            emoji = text_sentiment[2]
+            platform = urlparse(url).netloc.lower()
 
-            image_sentiment = "No image found"
-            image_path = None
-            image_folder = os.path.join(settings.BASE_DIR, result["image_folder"])
-            images = os.listdir(image_folder)
+            if "facebook" in platform:
+                scraper = SocialMediaScraper()
+                data = scraper.extract_social_media_data(url)
+                if data:
+                    post_text = data.get("post_text", "")
+                    result = analyze_sentiment(post_text)[0]  # Take first tuple
+                    text_sentiment = result[1]
+                    emoji = result[2]
+                    image_path = data.get("image_path")
+                    if image_path:
+                        image_sentiment = predict_image_sentiment(image_path)
 
-            if images:
-                image_path = os.path.join(result["image_folder"], images[0])
-                full_image_path = os.path.join(image_folder, images[0])
-                image_sentiment = predict_image_sentiment(full_image_path)
+            elif "x.com" in platform or "twitter" in platform:
+                twitter_login()
+                if "/status/" in url:
+                    data = extract_from_tweet(url)
+                    if data:
+                        post_text = data.get("post_text", "")
+                        result = analyze_sentiment(post_text)[0]  # Take first tuple
+                        text_sentiment = result[1]
+                        emoji = result[2]
+                        image_path = data.get("image_path")
+                        if image_path:
+                            image_sentiment = predict_image_sentiment(image_path)
+                elif "/hashtag/" in url or url.startswith("https://x.com/search?q=%23"):
+                    limit = min(int(request.POST.get("limit", 3)), 10)
+                    data = extract_from_hashtag(url, limit)
+                    if data:
+                        post_text = data.get("post_text", "")
+                        result = analyze_sentiment(post_text)[0]  # Take first tuple
+                        text_sentiment = result[1]
+                        emoji = result[2]
+                        image_path = data.get("image_path")
+                        if image_path:
+                            image_sentiment = predict_image_sentiment(image_path)
+                else:
+                    return render(request, "sentiment/url_result.html", {
+                        "url": url,
+                        "text_sentiment": "N/A",
+                        "emoji": "",
+                        "image_sentiment": "N/A",
+                        "image_path": None,
+                        "post_text": "",
+                        "error": "Invalid Twitter URL"
+                    })
+
+            else:
+                return render(request, "sentiment/url_result.html", {
+                    "url": url,
+                    "text_sentiment": "N/A",
+                    "emoji": "",
+                    "image_sentiment": "N/A",
+                    "image_path": None,
+                    "post_text": "",
+                    "error": "Unsupported platform"
+                })
+
+            # Save URL prediction
+            URLPrediction.objects.create(
+                url=url,
+                text_sentiment=text_sentiment,
+                image_sentiment=image_sentiment
+            )
 
             return render(request, "sentiment/url_result.html", {
                 "url": url,
-                "text_sentiment": text_label,
+                "text_sentiment": text_sentiment,
                 "emoji": emoji,
                 "image_sentiment": image_sentiment,
                 "image_path": image_path,
-                "post_text": result["combined_text"],
+                "post_text": post_text
             })
+
     return redirect("home")
