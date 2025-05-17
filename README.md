@@ -68,7 +68,7 @@ This project implements a multi-modal sentiment analysis system:
 
 
 
-3. **nstall Requirements**
+3. **install Requirements**
    ```bash
    pip install -r requirements.txt
 
