@@ -60,10 +60,14 @@
                     <form class="p-3 row justify-content-center" action="{% url 'result' %}" method="POST">
                         {% csrf_token %}
                         <label class="col-lg-12 text-center mb-3 fs-4 fw-bold text-white" for="text">Enter your text here</label>
-                        <div class="col-lg-12 row justify-content-center">
-                            <textarea class="col-6  txt-area text-center pt-3" name="text" placeholder="Lets analyze your text" id="text" ></textarea>
+                        <div class="text-center">
+                            <textarea class="txt-area text-center pt-3 text-white" name="text" placeholder="Lets analyze your text" id="text" ></textarea>
                         </div>
-                        <input class="col-lg-3 col-sm-4 col-6 mt-3 mb-3 dark-back text-white rounded submit" id="submit" type="submit" value="Analyze Sentiment" >
+                        <button type="submit" id="submit" class="mt-3 mb-3 text-white rounded submit">
+                            <span id="submit-text">Analyze Sentiment</span>
+                            <span id="spinner" class="spinner-border spinner-border-sm  d-none ms-2" role="status"></span>
+                        </button>
+
                     </form>
                 </div>
                 
@@ -71,31 +75,14 @@
                     <form class="p-3 row justify-content-center" action="{% url 'url_result' %}" method="POST">
                         {% csrf_token %}
                         <label class="col-lg-12 text-center mb-3 fs-4 fw-bold text-white" for="url">Enter URL here</label>
-                        <div class="col-lg-12 row justify-content-center">
-                            <textarea class="col-6  txt-area text-center pt-3" name="url" placeholder="Lets analyze your URL" id="text_url"></textarea>
+                        <div class="text-center">
+                            <textarea class="txt-area text-center pt-3 text-white" name="url" placeholder="Lets analyze your URL" id="text_url"></textarea>
                         </div>
-                        <!-- {% comment %} <div class="d-flex justify-content-center gap-3 pt-3">
-                            <label class>
-                                <input type="radio" name="option" value="Post">
-                                POST
-                            </label>
-                            
-                            <label>
-                                <input type="radio" name="option" value="Comments">
-                                Comments
-                            </label>
-                        </div>
-                        <div class="text-center p-2">
-                            <label class="text-center" for="numberSelect">Choose number of images to analyize:</label>
-                            <select id="numberSelect">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div> {% endcomment %} -->
-                        <input class="col-lg-3 col-sm-4 col-6 mt-3 mb-3 dark-back text-white rounded submit"  type="submit" value="Analyze URL">
+                        <button type="submit" id="submit-url" class="mt-3 mb-3 text-white rounded submit">
+                            <span id="submit-url-text">Analyze URL</span>
+                            <span id="spinner-url" class="spinner-border spinner-border-sm  d-none ms-2" role="status"></span>
+                        </button>
+
                     </form>
                 </div>
             </div>
@@ -113,27 +100,27 @@
             </ul>
         </div>
     </section>
-    <section class="position-relative p-5 part-2">
+    <section class="position-relative part-2">
         <img src="../../static/sentiment/images/bubbles1.png" alt="bubbles1" class="b-image-1">
-        <div class="container mt-5 white-part">
+        <div class="container  white-part">
             <!-- flex info about sentiment analysis -->
             <div class="pb-5">
                 <h1 class='text-center white-h'>How can sentiment analysis help you</h1>
             </div>
-            <div class="row container text-center m-auto pt-5">
-                <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="row container text-center m-auto pt-5 fw-bold">
+                <div class="col-lg-4 col-md-12 col-sm-12">
                     <p class="p-3 three-para">
                         <i class="fa-solid fa-check"></i>
                         Learn the topics your clients are most happy or unhappy about.
                     </p>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="col-lg-4 col-md-12 col-sm-12">
                     <p class="p-3 three-para">
                         <i class="fa-solid fa-check"></i>
                         Identify pain-points and detect patterns in client needs and behavior
                     </p>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="col-lg-4 col-md-12 col-sm-12">
                     <p class="p-3 three-para">
                         <i class="fa-solid fa-check"></i>
                         Quickly detect negative feedback and take action instantly.
@@ -143,21 +130,21 @@
         </div>
     </section>
     <section class="bg2 position-relative">
-        <img src="../../static/sentiment/images/bubble2.jpg" alt="bubbles2" class="shake-hand">
-        <img src="../../static/sentiment/images/bubbles3.png" alt="bubbles3" class="b-image-2">
-        <div class="text-center third-page">
-            <h1 class=" text-white">Use Cases For Our Solution</h1>
+        <img src="../../static/sentiment/images/bubble2.jpg" alt="bubbles2" class="shake-hand z-0">
+        <img src="../../static/sentiment/images/bubbles3.png" alt="bubbles3" class="b-image-2 z-0">
+        <div class="text-center  third-page m-auto">
+            <h1 class=" text-white position-relative z-1">Use Cases For Our Solution</h1>
             <h2 class=" text-white">Who Benefits ?</h2>
-            <div class="row container text-center m-auto justify-content-center gap-5 pt-5 cards">
-                <div class="col-3 card-1">
+            <div class="row container text-center m-auto justify-content-between cards">
+                <div class="col-lg-3 col-md-9 col-sm-12 card m-auto">
                     <h4 class="p-3">E-commerce</h4>
                     <p class="p-3">Analyze product reviews to improve sales.</p>
                 </div>
-                <div class="col-3 card-2">
+                <div class="col-lg-3 col-md-9 col-sm-12 card m-auto">
                     <h4 class="p-3">Social Media Managers</h4>
                     <p class="p-3">Track brand sentiment across platforms.</p>
                 </div>
-                <div class="col-3 card-3">
+                <div class="col-lg-3 col-md-9 col-sm-12 card m-auto">
                     <h4 class="p-3">Security</h4>
                     <p class="p-3">Detect inappropriate content automatically.</p>
                 </div>
@@ -165,9 +152,19 @@
         </div>
     </section>
     <footer>
-        
+        <div class="container text-center p-4">
+            <h1 class="pb-4">Contact us</h1>
+            <div class="row w-50 m-auto justify-content-between contact">
+                <i class="fa-brands fa-x-twitter col-lg-2 col-md-3 col-sm-3 col-5 pop"></i>
+                <i class="fa-brands fa-facebook col-lg-2 col-md-3 col-sm-3 col-5 pop"></i>
+                <i class="fa-brands fa-instagram col-lg-2 col-md-3 col-sm-3 col-5 pop"></i>
+                <i class="fa-brands fa-telegram col-lg-2 col-md-3 col-sm-3 col-5 pop"></i>
+            </div>
+            <hr class="mt-4">
+            <p>Copyright &copy; 2025. Social Media Analysis. All rights reserved</p>
+        </div>
     </footer>
     <script src="{% static 'sentiment/js/script.js' %}"></script>
+    {% comment %} <script src="js/script.js"></script> {% endcomment %}
 </body>
-
 </html>

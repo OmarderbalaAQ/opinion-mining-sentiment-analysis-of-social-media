@@ -48,9 +48,13 @@
     </nav>
 
     <section class="text-center body-back">
-        <div class="container part-1 position-relative">
-            <img src="../../static/sentiment/images/firstball.png" alt="ball" class="ball-1">
-            <h1 class="header p-3 text-white">Sentiment Analysis Result</h1>
+        <!-- <img src="images/firstball.png" alt="ball"> -->
+        <div class="container part-1">
+            <ul class="custom-bullets">
+                <li>
+                    <h1 class="header p-3 text-white">Sentiment Analysis Result</h1>
+                </li>
+            </ul>
             <p class="p-2 fs-5 text-white"><strong class="header">Text:</strong> {{ text }}</p>
             <p class="p-1 fs-5 text-white"><strong class="header">Predicted Sentiment:</strong> <i id="sent">{{ sentiment }}</i> {{ emoji }}</p>
             <br>

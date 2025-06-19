@@ -34,10 +34,28 @@
     padding-top: 12vh;
 }
 
-.ball-1{
+.custom-bullets {
+    list-style: none; /* Remove default bullets */
+    padding-left: 0;  /* Remove default padding */
+}
+
+.custom-bullets li {
+    position: relative;
+    padding-left: 30px; /* Space for the bullet */
+    margin-bottom: 8px; /* Optional spacing */
+}
+
+.custom-bullets li::before {
+    content: "";
     position: absolute;
     left: 0;
-    height: 100px;
+    top: 7vh;
+    transform: translateY(-50%);
+    width: 10vw; /* Adjust bullet width */
+    height: 10vh; /* Adjust bullet height */
+    background-image: url('../images/firstball.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .header{
@@ -49,7 +67,7 @@
 .but{
     display: inline-block;
     padding: 8px 16px;
-    background-color: #A294F9;
+    background-color: var(--dark-color);
     color: white;
     text-decoration: none;
     border-radius: 4px;
