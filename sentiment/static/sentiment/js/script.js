@@ -42,51 +42,6 @@ const textarea = document.getElementById("text");
         // }
         // let ok = saveChoice()
 
-        let savedChoice;
-
-        document.querySelectorAll('input[name="option"]').forEach(option => {
-            option.addEventListener('change', function() {
-                savedChoice = this.value;
-                console.log("Saved choice is:", savedChoice);
-            });
-        });
-
-        const numberSelect = document.getElementById('numberSelect');
-        function populateDropdownWithDOM() {
-            // Clear any existing options
-            numberSelect.innerHTML = '';
-            
-            // Create a document fragment to improve performance
-            const fragment = document.createDocumentFragment();
-            
-            // Create and append each option
-            for (let i = 1; i <= 100; i++) {
-                const option = document.createElement('option');
-                option.value = i.toString();
-                option.textContent = i.toString();
-                
-                // You can add custom attributes or conditional styling here
-                if (i % 10 === 0) {
-                    option.classList.add('decade');
-                    option.style.fontWeight = 'bold';
-                }
-                
-                // Add the option to the fragment
-                fragment.appendChild(option);
-            }
-            
-            // Append all options to the select element at once
-            numberSelect.appendChild(fragment);
-        }
-        
-        // Call the function to populate the dropdown
-        populateDropdownWithDOM();
-        const selectedValue = 1
-        numberSelect.addEventListener('change', function() {
-            const selectedValue = this.value;
-            console.log("number of images is",selectedValue)
-        })
-
         function validateURL() {
             const textareaValue = document.getElementById('text_url').value.trim();
             const pattern = /^https?:\/\/.+\..+/;
@@ -97,3 +52,81 @@ const textarea = document.getElementById("text");
                 alert("Please enter a valid URL starting with http:// or https://");
             }
         }
+
+// loading button on click
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("JS loaded ✅");
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector('#tab1 form'); // Text form
+    const button = document.getElementById("submit");
+    const buttonText = document.getElementById("submit-text");
+    const spinner = document.getElementById("spinner");
+
+    form.addEventListener("submit", function () {
+        // Activate loading
+        button.disabled = true;
+        spinner.classList.remove("d-none");
+        buttonText.textContent = "Analyzing...";
+    });
+});
+
+// handels the spinner after going back
+document.addEventListener("DOMContentLoaded", function () {
+    // Reset spinner and button state when user returns back via browser
+    window.addEventListener("pageshow", function (event) {
+        if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+            const submitInput = document.getElementById("submit");
+            const spinner = document.getElementById("spinner");
+
+            if (submitInput) {
+                submitInput.disabled = false;
+                submitInput.textContent = "Analyze Sentiment"; // original value
+            }
+
+            if (spinner) {
+                spinner.classList.add("d-none");
+            }
+        }
+    });
+});
+
+// url button
+document.addEventListener("DOMContentLoaded", function () {
+    const formUrl = document.querySelector('#tab2 form');
+    const submitBtnUrl = document.getElementById("submit-url");
+    const submitTextUrl = document.getElementById("submit-url-text");
+    const spinnerUrl = document.getElementById("spinner-url");
+
+    if (formUrl && submitBtnUrl && spinnerUrl) {
+        formUrl.addEventListener("submit", function () {
+            submitBtnUrl.disabled = true;
+            submitTextUrl.textContent = "Analyzing...";
+            spinnerUrl.classList.remove("d-none");
+        });
+    }
+
+    // Reset URL form state on back nav
+    window.addEventListener("pageshow", function (event) {
+        const isBack = event.persisted || performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+        if (isBack) {
+            if (submitBtnUrl) {
+                submitBtnUrl.disabled = false;
+                submitTextUrl.textContent = "Analyze URL";
+            }
+            if (spinnerUrl) {
+                spinnerUrl.classList.add("d-none");
+            }
+        }
+    });
+});
+
+
+
+
+

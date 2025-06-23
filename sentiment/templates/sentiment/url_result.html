@@ -12,11 +12,18 @@
 </head>
 
 <body>
+<<<<<<< HEAD
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg dark-back">
         <div class="container-fluid p-1">
             <a class="navbar-brand text-white" href="#">Social Media Analysis</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+=======
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid container p-1">
+            <a class="navbar-brand text-white" href="{% url 'home' %}">Social Media Analysis</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+>>>>>>> 3a6a8c779da0ab9bd18ad2ff91a4674072ed6017
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
@@ -38,6 +45,7 @@
         </div>
     </nav>
 
+<<<<<<< HEAD
     <!-- Main Section -->
     <section class="body-back text-white py-5">
         <div class="container text-center">
@@ -76,8 +84,97 @@
             {% endif %}
 
             <a class="but btn btn-light mt-3" href="{% url 'home' %}">🔄 Analyze Another URL</a>
+=======
+    <div class="main-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-xl-8">
+                    <div class="result-card">
+                        <!-- Header -->
+                        <div class="result-header">
+                            <h1 class="result-title">Analysis Complete</h1>
+                            <p class="result-subtitle">Your URL has been successfully analyzed using advanced AI</p>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="content-section">
+                            <!-- Analyzed URL -->
+                            <div class="mb-2 text-center">
+                                <h3 class="url sub-title">
+                                    <i class="fa-solid fa-link " style="color: #667eea;"></i>
+                                    Analyzed URL : {{url}}
+                                </h3>
+                            </div>
+                            <!-- Analyzed Text -->
+                            <div class="text-section">
+                                <h3 class="section-title">
+                                    <i class="fas fa-file-text" style="color: #667eea;"></i>
+                                    Analyzed Text
+                                </h3>
+                                <div class="analyzed-text">
+                                    {{ post_text }}
+                                </div>
+                            </div>
+
+                            <!-- Sentiment Result -->
+                            <div class="sentiment-result">
+                                <div class="sentiment-label">Predicted Sentiment</div>
+                                <div class="sentiment-value">
+                                    <span id="res" >{{ text_sentiment }}</span>
+                                    <span class="sentiment-emoji">{{emoji}}</span>
+                                </div>
+                            </div>
+
+                            <!-- image -->
+                            <div class="text-center mb-2">
+                                {% if image_path %}
+                                <h3 class="sub-title">
+                                    <i class="fa-solid fa-images" style="color: #667eea;"></i>
+                                    Analyzed Image
+                                </h3>
+                                <img class="d-block m-auto" src="/{{ image_path }}" alt="Analyzed Image" width="300">
+                                {% endif %}
+                            </div>
+
+                            <!-- Image Result -->
+                            <div class="sentiment-result">
+                                <div class="sentiment-label">Predicted Image</div>
+                                <div class="sentiment-value">
+                                    <span id="res" >{{ image_sentiment }}</span>
+                                </div>
+                            </div>
+
+
+                            <!-- Statistics -->
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-number" id="word-count">0</div>
+                                    <div class="stat-label">Words Analyzed</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">80%</div>
+                                    <div class="stat-label">Text Model Accuracy</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">72%</div>
+                                    <div class="stat-label">Image Model Accuracy</div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="action-buttons">
+                                <a href="{% url 'home' %}" class="btn-primary-custom">
+                                    <i class="fas fa-plus"></i>
+                                    Analyze Another URL
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+>>>>>>> 3a6a8c779da0ab9bd18ad2ff91a4674072ed6017
         </div>
-    </section>
+    </div>
 
     <script src="{% static 'sentiment/js/url_result.js' %}"></script>
 </body>
