@@ -1,38 +1,36 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Sentiment Result</title>
-
     <link rel="stylesheet" href="{% static 'sentiment/css/text_result.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-<<<<<<< HEAD
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg dark-back">
-        <div class="container-fluid p-1">
-            <a class="navbar-brand text-white" href="#">Social Media Analysis</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-=======
     <!-- bootstrap navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid container p-1">
             <a class="navbar-brand text-white" href="{% url 'home' %}">Social Media Analysis</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
->>>>>>> 3a6a8c779da0ab9bd18ad2ff91a4674072ed6017
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse flex-grow-0" id="navbarNavDropdown">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav align-items-end">
                     <li class="nav-item mx-3">
-                        <a class="nav-link active text-white" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link active text-white" aria-current="page" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item mx-3">
                         <a class="nav-link text-white" href="features.html">Features</a>
@@ -41,34 +39,20 @@
                         <a class="nav-link text-white" href="#">Pricing</a>
                     </li>
                     <li class="nav-item mx-3">
-                        <button class="nav-link but-back rounded" role="button">Book a Demo</button>
+                        <button class="nav-link but-back rounded" href="#" role="button">
+                            Book a Demo
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-<<<<<<< HEAD
-    <!-- Main Content -->
-    <section class="body-back text-white text-center py-5">
-        <div class="container position-relative">
-            <img src="{% static 'sentiment/images/firstball.png' %}" alt="ball" class="ball-1 position-absolute"
-                style="top: 0; left: 0;">
-
-            <h1 class="mb-4 fw-bold">📝 Sentiment Analysis Result</h1>
-
-            <div class="mb-4">
-                <h5><strong>Analyzed Text:</strong></h5>
-                <p class="fs-5 px-3" style="white-space: pre-line;">{{ text }}</p>
-            </div>
-
-            <div class="mb-4">
-                <h5><strong>Predicted Sentiment:</strong></h5>
-                <p class="fs-4"><span id="sent">{{ sentiment }}</span> {{ emoji }}</p>
-            </div>
-
-            <a class="but btn btn-light mt-3" href="{% url 'home' %}">🔁 Analyze Another Text</a>
-=======
     <div class="main-container">
         <div class="container">
             <div class="row justify-content-center">
@@ -97,7 +81,7 @@
                             <div class="sentiment-result">
                                 <div class="sentiment-label">Predicted Sentiment</div>
                                 <div class="sentiment-value">
-                                    <span id="res" >{{ sentiment }}</span>
+                                    <span id="res">{{ sentiment }}</span>
                                     <span class="sentiment-emoji">{{emoji}}</span>
                                 </div>
                             </div>
@@ -125,11 +109,11 @@
                     </div>
                 </div>
             </div>
->>>>>>> 3a6a8c779da0ab9bd18ad2ff91a4674072ed6017
         </div>
     </div>
 
     <script src="{% static 'sentiment/js/text_result.js' %}"></script>
+
 </body>
 
 </html>

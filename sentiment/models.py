@@ -14,8 +14,9 @@ class URLPrediction(models.Model):
     post_text = models.TextField()
     text_sentiment = models.CharField(max_length=10)
     image_sentiment = models.CharField(max_length=10, blank=True, null=True)
+    image_confidence = models.FloatField(blank=True, null=True)  # New field
     image_file = models.CharField(max_length=200, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.url} [{self.text_sentiment} / {self.image_sentiment}]"
+        return f"{self.url} [{self.text_sentiment} / {self.image_sentiment} ({self.image_confidence:.2f})]"

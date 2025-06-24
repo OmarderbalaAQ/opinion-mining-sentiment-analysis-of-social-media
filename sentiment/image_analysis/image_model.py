@@ -8,12 +8,11 @@ model = tf.keras.models.load_model("sentiment/image_analysis/best_model.h5")
 # Define the image size used during training
 IMG_SIZE = (224, 224)
 
-# Function to preprocess the image and predict sentiment
 def predict_image_sentiment(image_path):
     # Read the image using OpenCV
     image = cv2.imread(image_path)
     if image is None:
-        return "Invalid Image"
+        return "Invalid Image", 0.0  # Return default confidence
 
     # Resize and scale the image
     image = cv2.resize(image, IMG_SIZE)
@@ -23,8 +22,12 @@ def predict_image_sentiment(image_path):
     image = np.expand_dims(image, axis=0)
 
     # Predict
-    prediction = model.predict(image)[0][0]
-
+    prediction = model.predict(image, verbose=0)[0][0]  # Added verbose=0 to suppress output
+    
+    # Calculate confidence
+    confidence = prediction if prediction >= 0.5 else 1 - prediction
+    
     # Interpret result
     sentiment = "Positive" if prediction >= 0.5 else "Negative"
-    return sentiment
+    
+    return sentiment, float(confidence)  # Return both sentiment and confidence
